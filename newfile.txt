@@ -1,11 +1,17 @@
 My first git repo add
 This is my first edit
 
-git push origin main
---causes files to push to github
+git add <file name>
+--used to add file that is new or to be changed
 
 git commit -m "<New comment on change placed here>"
 --commits changes to the file to be upload
 
-git add <file name>
---used to add file that is new or to be changed
+git push origin main
+--causes files to push to github
+
+the order above is how to puh changes
+
+
+
+
