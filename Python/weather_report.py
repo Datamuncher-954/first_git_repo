@@ -10,6 +10,7 @@ weather_data = pd.read_html(weather_site)
 
 #pull the datetime of the latest forecast
 fcst_as_of_date = weather_data[0][1].values[0]
+print(f"Forecast {fcst_as_of_date}")
 
 #place webscarp of weaher forecast into dataframe
 weather_fcst_df = pd.DataFrame(weather_data[2])
@@ -48,3 +49,19 @@ for col in final_df.columns:
     else:
         print(f"{col} is being converted to float")
         final_df[col] = final_df[col].astype('float32')
+
+#assign time of day to forecast table
+def time_of_day(row):
+    if row['Hour (EDT)'] >= 0 and row['Hour (EDT)'] < 6:
+        return 'Overnight'
+    elif row['Hour (EDT)'] >= 6 and row['Hour (EDT)'] < 12:
+        return 'Morning'
+    elif row['Hour (EDT)'] >= 12 and row['Hour (EDT)'] < 15:
+        return 'Early Afternoon'
+    elif row['Hour (EDT)'] >= 15 and row['Hour (EDT)'] < 18:
+        return 'Late Afternoon'
+    else:
+        return 'Evening'
+
+final_df['Time of Day'] = final_df.apply(time_of_day, axis=1)
+print(f"Assign time of day to the forecast")
